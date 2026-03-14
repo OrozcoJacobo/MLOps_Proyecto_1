@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# --- Project-specific MLOps ignores ---
+.DS_Store
+models/*.pkl
+models/*.joblib
+minio_data/
+postgres_data/
+
 # Distribution / packaging
 .Python
 build/
