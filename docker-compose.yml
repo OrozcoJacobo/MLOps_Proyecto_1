@@ -13,7 +13,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-
   minio:
     image: minio/minio:latest
     container_name: mlops_minio
@@ -28,7 +27,6 @@ services:
     volumes:
       - minio_data:/data
 
-
   api:
     build:
       context: .
@@ -41,11 +39,17 @@ services:
       - postgres
       - minio
     environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: mlops_db
+      POSTGRES_USER: mlops_user
+      POSTGRES_PASSWORD: mlops_password
+
       MINIO_ENDPOINT: minio:9000
       MINIO_ACCESS_KEY: minio_admin
       MINIO_SECRET_KEY: minio_admin_password
       MINIO_BUCKET: models
-
+      MINIO_SECURE: "false"
 
 volumes:
   postgres_data:
