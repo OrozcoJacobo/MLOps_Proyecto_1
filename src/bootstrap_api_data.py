@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 from src.config import postgres_config
 
 
-API_URL = "http://10.43.101.94:8080/data"
+API_URL = "http://localhost:8080/data"
 GROUP_NUMBER = 8
 TABLE_NAME = "training_data"
 
@@ -95,6 +95,24 @@ def create_training_table(engine) -> None:
         connection.execute(text(create_table_sql))
 
 
+def parse_int(value) -> int:
+    """
+    Convert API numeric values into integers.
+
+    Parameters
+    ----------
+    value : Any
+        Numeric value returned by the API. It may arrive as an integer-like
+        string or as a float-like string such as '3352.0'.
+
+    Returns
+    -------
+    int
+        Parsed integer value.
+    """
+    return int(float(value))
+
+
 def insert_rows(engine, payload: dict) -> None:
     """
     Insert rows retrieved from the API into PostgreSQL.
@@ -156,19 +174,19 @@ def insert_rows(engine, payload: dict) -> None:
     for row in rows:
         parsed_rows.append(
             {
-                "elevation": int(row[0]),
-                "aspect": int(row[1]),
-                "slope": int(row[2]),
-                "horizontal_distance_to_hydrology": int(row[3]),
-                "vertical_distance_to_hydrology": int(row[4]),
-                "horizontal_distance_to_roadways": int(row[5]),
-                "hillshade_9am": int(row[6]),
-                "hillshade_noon": int(row[7]),
-                "hillshade_3pm": int(row[8]),
-                "horizontal_distance_to_fire_points": int(row[9]),
-                "wilderness_area": row[10],
-                "soil_type": row[11],
-                "cover_type": int(row[12]),
+                "elevation": parse_int(row[0]),
+                "aspect": parse_int(row[1]),
+                "slope": parse_int(row[2]),
+                "horizontal_distance_to_hydrology": parse_int(row[3]),
+                "vertical_distance_to_hydrology": parse_int(row[4]),
+                "horizontal_distance_to_roadways": parse_int(row[5]),
+                "hillshade_9am": parse_int(row[6]),
+                "hillshade_noon": parse_int(row[7]),
+                "hillshade_3pm": parse_int(row[8]),
+                "horizontal_distance_to_fire_points": parse_int(row[9]),
+                "wilderness_area": str(row[10]),
+                "soil_type": str(row[11]),
+                "cover_type": parse_int(row[12]),
                 "group_number": group_number,
                 "batch_number": batch_number,
             }
