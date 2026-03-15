@@ -32,9 +32,9 @@ services:
     image: postgres:15
     container_name: postgresql-airflow
     environment:
-      POSTGRESQL_USER: airflow
-      POSTGRESQL_PASSWORD: airflow
-      POSTGRESQL_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
     volumes:
       - postgresql_airflow_data:/var/lib/postgresql/data
     healthcheck:
@@ -50,9 +50,9 @@ services:
     image: postgres:15
     container_name: postgresql-data
     environment:
-      POSTGRESQL_USER: mlops
-      POSTGRESQL_PASSWORD: mlops123
-      POSTGRESQL_DB: mlops_db
+      POSTGRES_USER: mlops
+      POSTGRES_PASSWORD: mlops123
+      POSTGRES_DB: mlops_db
     volumes:
       - postgresql_data_volume:/var/lib/postgresql/data
       - ./postgresql/init:/docker-entrypoint-initdb.d
