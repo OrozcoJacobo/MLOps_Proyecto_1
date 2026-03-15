@@ -47,7 +47,7 @@ services:
 
   # ─── PostgreSQL para datos MLOps (raw, processed, ready) ───────────────────
   postgresql-data:
-    image: postgresql:15
+    image: postgres:15
     container_name: postgresql-data
     environment:
       POSTGRESQL_USER: mlops
