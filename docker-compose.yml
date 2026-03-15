@@ -120,7 +120,7 @@ services:
     depends_on:
       airflow-create-user:
         condition: service_completed_successfully
-      postgres-airflow:
+      postgresql-airflow:
         condition: service_healthy
     networks:
       - mlops-network
