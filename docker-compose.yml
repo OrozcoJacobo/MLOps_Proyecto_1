@@ -21,7 +21,7 @@ x-airflow-common: &airflow-common
     - ./airflow/config:/opt/airflow/config
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
-    postgres-airflow:
+    postgresql-airflow:
       condition: service_healthy
   extra_hosts:
     - "host.docker.internal:host-gateway"
