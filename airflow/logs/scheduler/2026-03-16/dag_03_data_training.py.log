@@ -1194,3 +1194,17 @@
 [2026-03-16T04:52:06.401+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:52:06.401+0000] {dag.py:3036} INFO - Sync 1 DAGs
 [2026-03-16T04:52:06.411+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:52:06.411+0000] {dag.py:3823} INFO - Setting next_dagrun for 3_model_training to 2026-03-16 04:00:00+00:00, run_after=2026-03-16 06:00:00+00:00
 [2026-03-16T04:52:06.431+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_03_data_training.py took 0.059 seconds
+[2026-03-16T04:52:36.703+0000] {processor.py:161} INFO - Started process (PID=2537) to work on /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:52:36.703+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_03_data_training.py for tasks to queue
+[2026-03-16T04:52:36.704+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:52:36.704+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:52:36.715+0000] {processor.py:840} INFO - DAG(s) '3_model_training' retrieved from /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:52:36.731+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:52:36.731+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-03-16T04:52:36.743+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:52:36.743+0000] {dag.py:3823} INFO - Setting next_dagrun for 3_model_training to 2026-03-16 04:00:00+00:00, run_after=2026-03-16 06:00:00+00:00
+[2026-03-16T04:52:36.755+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_03_data_training.py took 0.055 seconds
+[2026-03-16T04:53:07.068+0000] {processor.py:161} INFO - Started process (PID=2558) to work on /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:53:07.069+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_03_data_training.py for tasks to queue
+[2026-03-16T04:53:07.070+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:53:07.070+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:53:07.082+0000] {processor.py:840} INFO - DAG(s) '3_model_training' retrieved from /opt/airflow/dags/dag_03_data_training.py
+[2026-03-16T04:53:07.100+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:53:07.100+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-03-16T04:53:07.111+0000] {logging_mixin.py:188} INFO - [2026-03-16T04:53:07.111+0000] {dag.py:3823} INFO - Setting next_dagrun for 3_model_training to 2026-03-16 04:00:00+00:00, run_after=2026-03-16 06:00:00+00:00
+[2026-03-16T04:53:07.119+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_03_data_training.py took 0.054 seconds
