@@ -1,7 +1,7 @@
 [project]
-name = "api"
+name = "inference-api"
 version = "1.0.0"
-description = "API INFERENCIA"
+description = "Forest Cover Type Inference API"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi==0.111.0",
@@ -13,6 +13,7 @@ dependencies = [
     "minio==7.2.7",
     "psycopg2-binary==2.9.9",
     "python-multipart==0.0.9",
+    "dill==0.3.8",
 ]
 
 [build-system]

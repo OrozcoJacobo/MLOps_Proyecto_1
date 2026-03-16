@@ -1,0 +1,65 @@
+[2026-03-16T03:29:05.366+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:29:05.369+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:29:05.369+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:29:05.374+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:29:05.375+0000] {standard_task_runner.py:60} INFO - Started process 413 to run task
+[2026-03-16T03:29:05.377+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'train_model', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpprcrqdhg']
+[2026-03-16T03:29:05.378+0000] {standard_task_runner.py:88} INFO - Job 14: Subtask train_model
+[2026-03-16T03:29:05.401+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [running]> on host 7174bd7d5472
+[2026-03-16T03:29:05.431+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:29:06.046+0000] {dag_03_data_training.py:116} INFO - Train: (8133, 54), Val: (1743, 54), Test: (1744, 54)
+[2026-03-16T03:29:06.049+0000] {dag_03_data_training.py:155} INFO - Training random_forest...
+[2026-03-16T03:29:06.386+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/sklearn/ensemble/_base.py:214 UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+[2026-03-16T03:29:06.417+0000] {dag_03_data_training.py:162} INFO -   random_forest: val_acc=0.9220, val_f1=0.9167
+[2026-03-16T03:29:06.418+0000] {dag_03_data_training.py:155} INFO - Training gradient_boosting...
+[2026-03-16T03:29:11.389+0000] {dag_03_data_training.py:162} INFO -   gradient_boosting: val_acc=0.9283, val_f1=0.9244
+[2026-03-16T03:29:11.396+0000] {dag_03_data_training.py:180} INFO - Best model: gradient_boosting | test_acc=0.9346, test_f1=0.9329
+[2026-03-16T03:29:11.432+0000] {dag_03_data_training.py:202} INFO - Model saved to /tmp/model_package.joblib
+[2026-03-16T03:29:11.436+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:29:11.441+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=train_model, execution_date=20260316T000000, start_date=20260316T032905, end_date=20260316T032911
+[2026-03-16T03:29:11.451+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:29:11.459+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:42:36.621+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:42:36.625+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:42:36.625+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:42:36.630+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:42:36.631+0000] {standard_task_runner.py:60} INFO - Started process 417 to run task
+[2026-03-16T03:42:36.633+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'train_model', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpgqi5l4ua']
+[2026-03-16T03:42:36.634+0000] {standard_task_runner.py:88} INFO - Job 16: Subtask train_model
+[2026-03-16T03:42:36.653+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [running]> on host 2eefb3920a3b
+[2026-03-16T03:42:36.680+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:42:37.141+0000] {dag_03_data_training.py:116} INFO - Train: (1288, 54), Val: (276, 54), Test: (276, 54)
+[2026-03-16T03:42:37.143+0000] {dag_03_data_training.py:155} INFO - Training random_forest...
+[2026-03-16T03:42:37.452+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/sklearn/ensemble/_base.py:214 UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+[2026-03-16T03:42:37.460+0000] {dag_03_data_training.py:162} INFO -   random_forest: val_acc=0.8623, val_f1=0.8497
+[2026-03-16T03:42:37.460+0000] {dag_03_data_training.py:155} INFO - Training gradient_boosting...
+[2026-03-16T03:42:39.459+0000] {dag_03_data_training.py:162} INFO -   gradient_boosting: val_acc=0.8514, val_f1=0.8468
+[2026-03-16T03:42:39.460+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/sklearn/ensemble/_base.py:214 UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+[2026-03-16T03:42:39.467+0000] {dag_03_data_training.py:180} INFO - Best model: random_forest | test_acc=0.8732, test_f1=0.8647
+[2026-03-16T03:42:39.545+0000] {dag_03_data_training.py:202} INFO - Model saved to /tmp/model_package.joblib
+[2026-03-16T03:42:39.546+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:42:39.550+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=train_model, execution_date=20260316T000000, start_date=20260316T034236, end_date=20260316T034239
+[2026-03-16T03:42:39.564+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:42:39.572+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:55:51.063+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:55:51.066+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:55:51.066+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:55:51.070+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): train_model> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:55:51.072+0000] {standard_task_runner.py:60} INFO - Started process 412 to run task
+[2026-03-16T03:55:51.074+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'train_model', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpyq8_aca9']
+[2026-03-16T03:55:51.075+0000] {standard_task_runner.py:88} INFO - Job 14: Subtask train_model
+[2026-03-16T03:55:51.093+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.train_model scheduled__2026-03-16T00:00:00+00:00 [running]> on host a5b790665194
+[2026-03-16T03:55:51.120+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:55:51.605+0000] {dag_03_data_training.py:116} INFO - Train: (544, 54), Val: (116, 54), Test: (118, 54)
+[2026-03-16T03:55:51.606+0000] {dag_03_data_training.py:155} INFO - Training random_forest...
+[2026-03-16T03:55:51.853+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/sklearn/ensemble/_base.py:214 UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+[2026-03-16T03:55:51.859+0000] {dag_03_data_training.py:162} INFO -   random_forest: val_acc=1.0000, val_f1=1.0000
+[2026-03-16T03:55:51.859+0000] {dag_03_data_training.py:155} INFO - Training gradient_boosting...
+[2026-03-16T03:55:51.932+0000] {dag_03_data_training.py:162} INFO -   gradient_boosting: val_acc=1.0000, val_f1=1.0000
+[2026-03-16T03:55:51.933+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/sklearn/ensemble/_base.py:214 UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+[2026-03-16T03:55:51.937+0000] {dag_03_data_training.py:180} INFO - Best model: random_forest | test_acc=0.9915, test_f1=0.9912
+[2026-03-16T03:55:51.990+0000] {dag_03_data_training.py:202} INFO - Model saved to /tmp/model_package.joblib
+[2026-03-16T03:55:51.991+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:55:51.995+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=train_model, execution_date=20260316T000000, start_date=20260316T035551, end_date=20260316T035551
+[2026-03-16T03:55:52.033+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:55:52.043+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

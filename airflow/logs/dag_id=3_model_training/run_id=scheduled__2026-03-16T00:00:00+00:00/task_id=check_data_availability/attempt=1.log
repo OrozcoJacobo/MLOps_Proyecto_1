@@ -23,3 +23,96 @@ ValueError: Insufficient training data: 0 samples (minimum required: 100)
 [2026-03-16T03:13:11.004+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task check_data_availability (Insufficient training data: 0 samples (minimum required: 100); 196)
 [2026-03-16T03:13:11.016+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
 [2026-03-16T03:13:11.032+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:24:04.129+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:24:04.135+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:24:04.136+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:24:04.141+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:24:04.143+0000] {standard_task_runner.py:60} INFO - Started process 196 to run task
+[2026-03-16T03:24:04.145+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpriar8_yv']
+[2026-03-16T03:24:04.146+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask check_data_availability
+[2026-03-16T03:24:04.168+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host 7174bd7d5472
+[2026-03-16T03:24:04.201+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:24:04.205+0000] {dag_03_data_training.py:62} INFO - Training samples available: 0
+[2026-03-16T03:24:04.205+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_03_data_training.py", line 65, in check_data_availability
+    raise ValueError(
+ValueError: Insufficient training data: 0 samples (minimum required: 100)
+[2026-03-16T03:24:04.209+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T032404, end_date=20260316T032404
+[2026-03-16T03:24:04.216+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task check_data_availability (Insufficient training data: 0 samples (minimum required: 100); 196)
+[2026-03-16T03:24:04.241+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-16T03:24:04.258+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:37:35.196+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:37:35.199+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:37:35.199+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:37:35.204+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:37:35.205+0000] {standard_task_runner.py:60} INFO - Started process 197 to run task
+[2026-03-16T03:37:35.207+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmp112_sid6']
+[2026-03-16T03:37:35.208+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask check_data_availability
+[2026-03-16T03:37:35.230+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host 2eefb3920a3b
+[2026-03-16T03:37:35.264+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:37:35.268+0000] {dag_03_data_training.py:62} INFO - Training samples available: 0
+[2026-03-16T03:37:35.268+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_03_data_training.py", line 65, in check_data_availability
+    raise ValueError(
+ValueError: Insufficient training data: 0 samples (minimum required: 100)
+[2026-03-16T03:37:35.273+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T033735, end_date=20260316T033735
+[2026-03-16T03:37:35.279+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 4 for task check_data_availability (Insufficient training data: 0 samples (minimum required: 100); 197)
+[2026-03-16T03:37:35.307+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-16T03:37:35.323+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:50:49.778+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:50:49.782+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:50:49.782+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:50:49.787+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:50:49.789+0000] {standard_task_runner.py:60} INFO - Started process 196 to run task
+[2026-03-16T03:50:49.791+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpthri1u_5']
+[2026-03-16T03:50:49.792+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask check_data_availability
+[2026-03-16T03:50:49.818+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host a5b790665194
+[2026-03-16T03:50:49.853+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:50:49.857+0000] {dag_03_data_training.py:62} INFO - Training samples available: 0
+[2026-03-16T03:50:49.857+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_03_data_training.py", line 65, in check_data_availability
+    raise ValueError(
+ValueError: Insufficient training data: 0 samples (minimum required: 100)
+[2026-03-16T03:50:49.863+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T035049, end_date=20260316T035049
+[2026-03-16T03:50:49.869+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task check_data_availability (Insufficient training data: 0 samples (minimum required: 100); 196)
+[2026-03-16T03:50:49.888+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-16T03:50:49.907+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:58:38.154+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:58:38.158+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:58:38.158+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-03-16T03:58:38.163+0000] {taskinstance.py:2191} INFO - Executing <Task(ShortCircuitOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:58:38.165+0000] {standard_task_runner.py:60} INFO - Started process 197 to run task
+[2026-03-16T03:58:38.166+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmpqlyyc_hm']
+[2026-03-16T03:58:38.167+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask check_data_availability
+[2026-03-16T03:58:38.191+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host 9d11552eaf6e
+[2026-03-16T03:58:38.222+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:58:38.225+0000] {dag_03_data_training.py:67} INFO - Training samples available: 0
+[2026-03-16T03:58:38.226+0000] {dag_03_data_training.py:70} INFO - Not enough data yet (0/100). Skipping training — will retry on next scheduled run.
+[2026-03-16T03:58:38.226+0000] {python.py:201} INFO - Done. Returned value was: False
+[2026-03-16T03:58:38.226+0000] {python.py:268} INFO - Condition result is False
+[2026-03-16T03:58:38.226+0000] {python.py:295} INFO - Skipping downstream tasks
+[2026-03-16T03:58:38.239+0000] {python.py:303} INFO - Done.
+[2026-03-16T03:58:38.251+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T035838, end_date=20260316T035838
+[2026-03-16T03:58:38.265+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:58:38.276+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

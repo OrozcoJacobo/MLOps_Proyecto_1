@@ -1,0 +1,14 @@
+[2026-03-16T03:24:06.246+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.restart_data_generation scheduled__2026-03-16T03:15:00+00:00 [queued]>
+[2026-03-16T03:24:06.250+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.restart_data_generation scheduled__2026-03-16T03:15:00+00:00 [queued]>
+[2026-03-16T03:24:06.250+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T03:24:06.254+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): restart_data_generation> on 2026-03-16 03:15:00+00:00
+[2026-03-16T03:24:06.256+0000] {standard_task_runner.py:60} INFO - Started process 204 to run task
+[2026-03-16T03:24:06.258+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'restart_data_generation', 'scheduled__2026-03-16T03:15:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmpe0a24l06']
+[2026-03-16T03:24:06.259+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask restart_data_generation
+[2026-03-16T03:24:06.280+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.restart_data_generation scheduled__2026-03-16T03:15:00+00:00 [running]> on host 7174bd7d5472
+[2026-03-16T03:24:06.311+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='restart_data_generation' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T03:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T03:15:00+00:00'
+[2026-03-16T03:24:06.362+0000] {dag_01_data_collection.py:176} INFO - Data was fetched successfully — no restart needed.
+[2026-03-16T03:24:06.363+0000] {python.py:201} INFO - Done. Returned value was: No restart needed.
+[2026-03-16T03:24:06.372+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=1_data_collection, task_id=restart_data_generation, execution_date=20260316T031500, start_date=20260316T032406, end_date=20260316T032406
+[2026-03-16T03:24:06.395+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:24:06.402+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
