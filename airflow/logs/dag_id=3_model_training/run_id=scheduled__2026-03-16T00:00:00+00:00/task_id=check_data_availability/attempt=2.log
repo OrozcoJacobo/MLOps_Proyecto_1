@@ -1,0 +1,42 @@
+[2026-03-16T03:29:04.314+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:29:04.317+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:29:04.317+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-03-16T03:29:04.321+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:29:04.323+0000] {standard_task_runner.py:60} INFO - Started process 411 to run task
+[2026-03-16T03:29:04.325+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmp026d72k5']
+[2026-03-16T03:29:04.326+0000] {standard_task_runner.py:88} INFO - Job 13: Subtask check_data_availability
+[2026-03-16T03:29:04.351+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host 7174bd7d5472
+[2026-03-16T03:29:04.379+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:29:04.383+0000] {dag_03_data_training.py:62} INFO - Training samples available: 8133
+[2026-03-16T03:29:04.388+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:29:04.392+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T032904, end_date=20260316T032904
+[2026-03-16T03:29:04.422+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:29:04.433+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:42:36.403+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:42:36.406+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:42:36.407+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-03-16T03:42:36.411+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:42:36.412+0000] {standard_task_runner.py:60} INFO - Started process 415 to run task
+[2026-03-16T03:42:36.414+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmps__xixcn']
+[2026-03-16T03:42:36.415+0000] {standard_task_runner.py:88} INFO - Job 15: Subtask check_data_availability
+[2026-03-16T03:42:36.434+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host 2eefb3920a3b
+[2026-03-16T03:42:36.460+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:42:36.463+0000] {dag_03_data_training.py:62} INFO - Training samples available: 1288
+[2026-03-16T03:42:36.468+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:42:36.472+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T034236, end_date=20260316T034236
+[2026-03-16T03:42:36.516+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:42:36.527+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T03:55:49.987+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:55:49.990+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [queued]>
+[2026-03-16T03:55:49.990+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-03-16T03:55:49.995+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): check_data_availability> on 2026-03-16 00:00:00+00:00
+[2026-03-16T03:55:49.996+0000] {standard_task_runner.py:60} INFO - Started process 410 to run task
+[2026-03-16T03:55:49.998+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '3_model_training', 'check_data_availability', 'scheduled__2026-03-16T00:00:00+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/dag_03_data_training.py', '--cfg-path', '/tmp/tmp9eo9ewtb']
+[2026-03-16T03:55:49.999+0000] {standard_task_runner.py:88} INFO - Job 13: Subtask check_data_availability
+[2026-03-16T03:55:50.018+0000] {task_command.py:423} INFO - Running <TaskInstance: 3_model_training.check_data_availability scheduled__2026-03-16T00:00:00+00:00 [running]> on host a5b790665194
+[2026-03-16T03:55:50.045+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='3_model_training' AIRFLOW_CTX_TASK_ID='check_data_availability' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:00:00+00:00'
+[2026-03-16T03:55:50.048+0000] {dag_03_data_training.py:62} INFO - Training samples available: 544
+[2026-03-16T03:55:50.052+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T03:55:50.056+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=3_model_training, task_id=check_data_availability, execution_date=20260316T000000, start_date=20260316T035549, end_date=20260316T035550
+[2026-03-16T03:55:50.095+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T03:55:50.105+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

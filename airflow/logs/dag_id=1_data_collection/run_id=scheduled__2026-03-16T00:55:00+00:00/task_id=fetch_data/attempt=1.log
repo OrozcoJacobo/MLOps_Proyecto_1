@@ -1,0 +1,30 @@
+[2026-03-16T01:00:00.402+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [queued]>
+[2026-03-16T01:00:00.407+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [queued]>
+[2026-03-16T01:00:00.407+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T01:00:00.414+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-16 00:55:00+00:00
+[2026-03-16T01:00:00.416+0000] {standard_task_runner.py:60} INFO - Started process 251 to run task
+[2026-03-16T01:00:00.418+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-16T00:55:00+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmpcgwtpx5d']
+[2026-03-16T01:00:00.420+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask fetch_data
+[2026-03-16T01:00:00.444+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [running]> on host 9e8c0c2e5d97
+[2026-03-16T01:00:00.477+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:55:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:55:00+00:00'
+[2026-03-16T01:00:00.478+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=1
+[2026-03-16T01:00:00.484+0000] {dag_01_data_collection.py:50} INFO - API response 400: Ya se recolectó toda la información mínima necesaria — skipping this run.
+[2026-03-16T01:00:00.489+0000] {python.py:201} INFO - Done. Returned value was: No data available for this batch — skipping.
+[2026-03-16T01:00:00.497+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260316T005500, start_date=20260316T010000, end_date=20260316T010000
+[2026-03-16T01:00:00.514+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T01:00:00.525+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T01:03:07.378+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [queued]>
+[2026-03-16T01:03:07.383+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [queued]>
+[2026-03-16T01:03:07.384+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T01:03:07.390+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-16 00:55:00+00:00
+[2026-03-16T01:03:07.392+0000] {standard_task_runner.py:60} INFO - Started process 190 to run task
+[2026-03-16T01:03:07.394+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-16T00:55:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmp1fqip5hw']
+[2026-03-16T01:03:07.395+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask fetch_data
+[2026-03-16T01:03:07.420+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T00:55:00+00:00 [running]> on host 572fb92527f1
+[2026-03-16T01:03:07.455+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T00:55:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T00:55:00+00:00'
+[2026-03-16T01:03:07.455+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=2
+[2026-03-16T01:03:08.758+0000] {dag_01_data_collection.py:56} INFO - Received 1 records
+[2026-03-16T01:03:08.823+0000] {python.py:201} INFO - Done. Returned value was: Fetched 1 records
+[2026-03-16T01:03:08.832+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260316T005500, start_date=20260316T010307, end_date=20260316T010308
+[2026-03-16T01:03:08.845+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T01:03:08.859+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
