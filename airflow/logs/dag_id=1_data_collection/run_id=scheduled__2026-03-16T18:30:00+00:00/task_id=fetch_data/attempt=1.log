@@ -1,0 +1,15 @@
+[2026-03-16T18:35:00.409+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T18:30:00+00:00 [queued]>
+[2026-03-16T18:35:00.412+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T18:30:00+00:00 [queued]>
+[2026-03-16T18:35:00.412+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T18:35:00.417+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-16 18:30:00+00:00
+[2026-03-16T18:35:00.418+0000] {standard_task_runner.py:60} INFO - Started process 1760 to run task
+[2026-03-16T18:35:00.420+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-16T18:30:00+00:00', '--job-id', '58', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmply6hvatc']
+[2026-03-16T18:35:00.421+0000] {standard_task_runner.py:88} INFO - Job 58: Subtask fetch_data
+[2026-03-16T18:35:00.443+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T18:30:00+00:00 [running]> on host 3a7b3ca96720
+[2026-03-16T18:35:00.474+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T18:30:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T18:30:00+00:00'
+[2026-03-16T18:35:00.475+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=8
+[2026-03-16T18:35:00.669+0000] {dag_01_data_collection.py:56} INFO - Received 1 records
+[2026-03-16T18:35:00.726+0000] {python.py:201} INFO - Done. Returned value was: Fetched 1 records
+[2026-03-16T18:35:00.735+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260316T183000, start_date=20260316T183500, end_date=20260316T183500
+[2026-03-16T18:35:00.775+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T18:35:00.788+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

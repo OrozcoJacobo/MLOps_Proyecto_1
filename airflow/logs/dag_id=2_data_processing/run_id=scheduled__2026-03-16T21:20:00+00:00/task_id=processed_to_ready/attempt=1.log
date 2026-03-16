@@ -1,0 +1,15 @@
+[2026-03-16T21:30:02.672+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 2_data_processing.processed_to_ready scheduled__2026-03-16T21:20:00+00:00 [queued]>
+[2026-03-16T21:30:02.677+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 2_data_processing.processed_to_ready scheduled__2026-03-16T21:20:00+00:00 [queued]>
+[2026-03-16T21:30:02.677+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-03-16T21:30:02.684+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): processed_to_ready> on 2026-03-16 21:20:00+00:00
+[2026-03-16T21:30:02.686+0000] {standard_task_runner.py:60} INFO - Started process 1944 to run task
+[2026-03-16T21:30:02.688+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '2_data_processing', 'processed_to_ready', 'scheduled__2026-03-16T21:20:00+00:00', '--job-id', '95', '--raw', '--subdir', 'DAGS_FOLDER/dag_02_data_processing.py', '--cfg-path', '/tmp/tmp5mwxpbbw']
+[2026-03-16T21:30:02.689+0000] {standard_task_runner.py:88} INFO - Job 95: Subtask processed_to_ready
+[2026-03-16T21:30:02.711+0000] {task_command.py:423} INFO - Running <TaskInstance: 2_data_processing.processed_to_ready scheduled__2026-03-16T21:20:00+00:00 [running]> on host 6d4e89ba4db6
+[2026-03-16T21:30:02.745+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='2_data_processing' AIRFLOW_CTX_TASK_ID='processed_to_ready' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T21:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T21:20:00+00:00'
+[2026-03-16T21:30:02.766+0000] {dag_02_data_processing.py:253} INFO - Preparing 11620 records for training
+[2026-03-16T21:30:04.033+0000] {dag_02_data_processing.py:291} INFO - Inserted 11620 records into ready.forest_cover
+[2026-03-16T21:30:04.037+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-03-16T21:30:04.042+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=2_data_processing, task_id=processed_to_ready, execution_date=20260316T212000, start_date=20260316T213002, end_date=20260316T213004
+[2026-03-16T21:30:04.054+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-03-16T21:30:04.064+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,7 +1,9 @@
-# 🌲 MLOps Project - Forest Cover Type Classification
+# 🌲 MLOps Proyecto 1
 
 **Pontificia Universidad Javeriana | MLOps 2026**  
 **Grupo 8**
+- Jacobo Orozco
+- Javier Chaparro
 
 ---
 
@@ -170,8 +172,8 @@ raw_to_processed → processed_to_ready
   - Convierte `soil_type` de one-hot → código categórico (`C7745`, `C2703`, etc.)
   - Convierte `Cover_Type` de rango 1-7 → **0-6**
 - **processed → ready:**
-  - Re-aplica one-hot encoding para dejar 54 features listas para el modelo
-  - Split estratificado: **70% train / 15% val / 15% test**
+  - Aplica nuevamente one-hot encoding para dejar 54 features listas para el modelo
+  - Estratificación de clases: **70% train / 15% val / 15% test**
 
 Ejecución DAG 2 exitosa
 
@@ -185,10 +187,10 @@ Tablas en BD posterior a la primera ejecución DAG 1 y 2 (recolección y procesa
 ```
 check_data_availability → train_model → upload_to_minio
 ```
-- Requiere mínimo **100 muestras** de entrenamiento (si no hay suficientes, el DAG termina limpiamente sin error)
-- Entrena **Random Forest** y **Gradient Boosting** en paralelo
+- Requiere mínimo 100 muestras de entrenamiento (si no hay suficientes omite steps 2 y 3, el DAG termina sin error)
+- Entrena dos modelos en paralelo: Random Forest y Gradient Boosting
 - Escalado selectivo: `StandardScaler` solo sobre las 10 features numéricas (no sobre las binarias one-hot)
-- Selecciona el mejor modelo por `validation accuracy`
+- Selecciona el mejor modelo teniendo en cuenta su accuracy `validation accuracy`
 - Guarda en MinIO: `mlops-models/models/{algorithm}/{version}/model_package.joblib`
 - Registra métricas en `public.model_registry` y marca el nuevo modelo como activo
 
@@ -213,6 +215,8 @@ Ejecución DAG 3 exitosa
 | `ready` | `forest_cover` | Features array de 54 columnas con split asignado |
 | `public` | `model_registry` | Registro de modelos entrenados con métricas |
 
+Los schemas y las tablas son creadas a partir del archivo: 01_init.sql
+
 ### Tipos de Cobertura Forestal (Cover_Type 0-6)
 
 | ID | Tipo |
@@ -229,18 +233,19 @@ Ejecución DAG 3 exitosa
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.13.13 PM.png>)
 
+## Verificación de métricas almacenadas en la BD
+
+![alt text](</images/Screenshot 2026-03-16 at 5.08.43 PM.png>)
+
 ---
 
 ## Modelos almacenados en MinIO
 
-Para acceder a MinIO se utilizan los siguientes datos:
-
-username: minioadmin
-password: minioadmin123
+Los modelos quedan almacenados en el directorio "models"
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.31.42 PM.png>)
 
-Cada directorio tiene almacenadas distintas versiones de los modelos, según el número de ejecuciones. 
+Cada directorio tiene almacenadas distintas versiones de los modelos, según el número de ejecuciones de los DAG.  
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.33.34 PM.png>)
 
@@ -304,12 +309,21 @@ curl http://localhost:8000/model/info         # Info del modelo activo
 
 ---
 
+---
+
+## Jupyter
+
+Se crea un notebook para la exploración completa del pipeline.
+
+![alt text](</images/Screenshot 2026-03-16 at 5.18.41 PM.png>)
+
+---
+
 ## 📁 Estructura del Proyecto
 
 ```
 mlops-project/
 ├── docker-compose.yml
-├── .env
 ├── README.md
 │
 ├── airflow/
@@ -319,10 +333,9 @@ mlops-project/
 │   │   ├── dag_02_data_processing.py       # Procesamiento (cada 10 min)
 │   │   └── dag_03_model_training.py        # Entrenamiento (cada 2 h)
 │   ├── logs/
-│   ├── plugins/
 │   └── config/
 │
-├── inference-api/
+├── api/
 │   ├── main.py                             # FastAPI app
 │   ├── pyproject.toml                      # Dependencias (uv)
 │   └── Dockerfile
@@ -334,7 +347,6 @@ mlops-project/
 └── jupyter/
     └── mlops_pipeline_exploration.ipynb    # Notebook de exploración
 ```
-
 ---
 
 ## 🛑 Detener Servicios
@@ -348,45 +360,27 @@ docker-compose down -v     # Detiene y elimina volúmenes (borra todos los datos
 
 ## ⚠️ Notas Importantes
 
-1. **Una petición por ejecución de DAG** — el DAG 1 hace exactamente 1 petición por run, cumpliendo el requisito del proyecto.
-2. **Reinicio automático de batch** — cuando la API responde `400`, el DAG llama automáticamente a `/restart_data_generation` para que el siguiente run tenga datos disponibles.
-3. **Cover_Type 0-6** — el modelo predice en rango 0-6 (el dataset original usa 1-7; la transformación se aplica en el DAG 2).
-4. **Modelo activo** — solo un modelo tiene `is_active=TRUE` en `model_registry`; la API siempre carga ese. Usar `POST /model/reload` después de un nuevo entrenamiento si la API ya estaba corriendo.
-5. **Mínimo de datos** — el DAG 3 requiere al menos 100 muestras en `ready.forest_cover` para entrenar. Si no hay suficientes, el DAG termina en verde (skipped) sin error.
+1. **Una petición por ejecución de DAG** — el DAG 1 hace exactamente 1 petición por run.
+2. **Reinicio automático de batch** — cuando la API responde `400`, el DAG ejecuta automáticamente el método `/restart_data_generation` para que la siguiente ejecución tenga datos disponibles. Se podrán obtener datos más de diez veces...
+3. **Cover_Type 0-6** — el modelo predice en rango 0-6 (el dataset original usa 1-7 y la transformación se aplica en el DAG 2).
+4. **Modelo activo** — solo un modelo tiene el valor `is_active=TRUE` en el atributo `model_registry` y la API siempre carga ese. Se debe usar `POST /model/reload` después de un nuevo entrenamiento si la API ya estaba en ejecución.
+5. **Mínimo de datos** — el DAG 3 requiere al menos 100 muestras almacenadas en la tabla `ready.forest_cover` para entrenar. Si no hay suficientes, el DAG termina sin error, pero no realiza entrenamiento, simplemente omite los siguientes steps.
 
 ---
 
-## 🐛 Problemas Encontrados y Soluciones
-
-### Problema 1: Imagen de PostgreSQL incorrecta
-
-**Síntoma:** Al ejecutar `docker-compose up -d` fallaba inmediatamente con:
-```
-pull access denied for postgresql, repository does not exist or may require 'docker login'
-```
-
-**Causa:** En el `docker-compose.yml` se usó `image: postgresql:15` como nombre de la imagen. La imagen oficial de PostgreSQL en Docker Hub se llama `postgres`, no `postgresql`. Docker intentaba buscar un repositorio inexistente.
-
-**Solución:** Cambiar el nombre de la imagen en todos los servicios de PostgreSQL del `docker-compose.yml`:
-```yaml
-# Antes
-image: postgresql:15
-
-# Después
-image: postgres:15
-```
+## 🐛 Problemas encontrados y soluciones
 
 ---
 
-### Problema 2: Airflow no iniciaba — base de datos no inicializada
+### Problema 1: Airflow no iniciaba — base de datos no inicializada
 
-**Síntoma:** Los contenedores `airflow-webserver` y `airflow-scheduler` quedaban en estado `Restarting` indefinidamente con el error:
+**Descripción:** Los contenedores `airflow-webserver` y `airflow-scheduler` quedaban en estado `Restarting` indefinidamente con el error:
 ```
 ERROR: You need to initialize the database. Please run `airflow db init`.
 Make sure the command is run using Airflow version 2.8.1.
 ```
 
-**Causa:** Había dos problemas simultáneos. Primero, el webserver y el scheduler arrancaban antes de que `airflow-init` completara la migración de la base de datos, porque el `depends_on` con `service_completed_successfully` no funcionaba correctamente en Docker Compose V2 en Mac — los servicios dependientes simplemente no se creaban. Segundo, el comando `airflow db migrate` usado en el init no es equivalente a `airflow db init` para una instalación fresca; el webserver de la versión 2.8.1 requiere específicamente `airflow db init` para la primera inicialización.
+**Causa:** Había dos problemas simultáneos. Primero, el webserver y el scheduler arrancaban antes de que `airflow-init` completara la migración de la base de datos, porque el `depends_on` con `service_completed_successfully` no funcionaba correctamente y los servicios dependientes simplemente no se creaban. Segundo, el comando `airflow db migrate` usado en el init no es equivalente a `airflow db init` para una instalación fresca; el webserver de la versión 2.8.1 requiere específicamente `airflow db init` para la primera inicialización.
 
 **Solución:** Reestructurar la secuencia de inicio en dos servicios separados con `restart: "no"` para que no se reinicien en bucle, y usar `airflow db init` en lugar de `airflow db migrate`:
 ```yaml
@@ -409,9 +403,9 @@ airflow-webserver:
 
 ---
 
-### Problema 3: scikit-learn==1.4.2 incompatible con Python 3.8
+### Problema 2: scikit-learn==1.4.2 incompatible con Python 3.8
 
-**Síntoma:** Los contenedores de Airflow fallaban al instalar dependencias con:
+**Descripción:** Los contenedores de Airflow fallaban al instalar dependencias con:
 ```
 ERROR: Could not find a version that satisfies the requirement scikit-learn==1.4.2
 ERROR: Ignored the following versions that require a different python version:
@@ -435,28 +429,17 @@ RUN apt-get update && apt-get install -y gcc libpq-dev
 USER airflow
 RUN pip install --no-cache-dir scikit-learn==1.3.2 numpy==1.24.4 ...
 ```
-
 ---
 
-### Problema 4: DAGs no aparecían en Airflow
+### Problema 3: DAG 1 fallaba con error 400
 
-**Síntoma:** La interfaz web de Airflow en `http://localhost:8080` mostraba "No results" en la lista de DAGs, aunque los servicios estaban corriendo correctamente.
-
-**Causa:** El directorio `./airflow/dags/` en la máquina local estaba vacío. Airflow monta ese directorio como volumen dentro del contenedor en `/opt/airflow/dags/`. Si la carpeta local no contiene archivos `.py`, el scheduler no tiene DAGs que cargar. La confusión surgió porque se asumía que los DAGs se generarían automáticamente.
-
-**Solución:** Copiar los tres archivos de DAGs al directorio `airflow/dags/` del proyecto en la máquina local. El scheduler de Airflow escanea esa carpeta continuamente y detecta los archivos nuevos en aproximadamente 30 segundos, sin necesidad de reiniciar ningún contenedor.
-
----
-
-### Problema 5: DAG 1 fallaba con error 400
-
-**Síntoma:** El DAG 1 fallaba en la tarea `fetch_data` con:
+**Descripción:** El DAG 1 fallaba en el step `fetch_data` con:
 ```
 requests.exceptions.HTTPError: 400 Client Error: Bad Request for url:
 http://host.docker.internal:80/data?group_number=8
 ```
 
-**Causa:** La Data API devuelve HTTP 400 con el mensaje `{"detail": "Ya se recolectó toda la información mínima necesaria"}` cuando el batch actual ya fue agotado por peticiones previas de otros grupos. El código del DAG llamaba `response.raise_for_status()` sin verificar primero el código de estado, por lo que interpretaba este 400 como un error fatal y lanzaba una excepción, marcando la tarea como fallida.
+**Causa:** La Data API devuelve HTTP 400 con el mensaje `{"detail": "Ya se recolectó toda la información mínima necesaria"}` cuando el batch actual ya fue agotado por peticiones previas. El código del DAG llamaba `response.raise_for_status()` sin verificar primero el código de estado, por lo que interpretaba este 400 como un error fatal y lanzaba una excepción, marcando la tarea como fallida.
 
 **Solución:** Manejar el código 400 explícitamente antes de llamar `raise_for_status()`, tratándolo como una condición normal de negocio y no como un error. Adicionalmente, se agregó una tercera tarea `restart_data_generation` que llama al endpoint `/restart_data_generation?group_number=8` cuando no hay datos disponibles, para que el siguiente run del DAG pueda recolectar datos del batch nuevo:
 ```python
@@ -467,9 +450,9 @@ if response.status_code == 400:
 
 ---
 
-### Problema 6: Datos raw guardados con NULLs en todas las columnas
+### Problema 4: Datos raw guardados con NULLs en todas las columnas
 
-**Síntoma:** Los registros en `raw.forest_cover` se creaban correctamente pero con `elevation`, `aspect`, `slope` y todas las demás features en `NULL`. Solo `batch_number` y `group_number` tenían valores.
+**Descripción:** Los registros en `raw.forest_cover` se creaban correctamente pero con `elevation`, `aspect`, `slope` y todas las demás features en `NULL`. Solo `batch_number` y `group_number` tenían valores.
 
 **Causa:** El DAG intentaba acceder a los datos como diccionarios con claves (`r.get("elevation")`, `r.get("soil_type")`), pero la API devuelve los datos en formato de arrays posicionales sin nombres de columna, dentro de una estructura anidada:
 ```json
@@ -489,35 +472,9 @@ También fue necesario actualizar la tabla `raw.forest_cover` para tener `wilder
 
 ---
 
-### Problema 7: Credenciales de MinIO incorrectas en el DAG 3
+### Problema 5: DAG 3 fallaba al inicio del sistema por falta de datos
 
-**Síntoma:** La tarea `upload_to_minio` del DAG 3 fallaba con:
-```
-minio.error.S3Error: S3 operation failed; code: InvalidAccessKeyId,
-message: The Access Key Id you provided does not exist in our records.
-```
-
-**Causa:** El `docker-compose.yml` del proyecto definía las credenciales de MinIO como `MINIO_ROOT_USER=minio_admin` y `MINIO_ROOT_PASSWORD=minio_admin_password`. Sin embargo, los DAGs usaban las credenciales por defecto `minioadmin/minioadmin123` a través de variables de entorno que nunca se pasaron al bloque `x-airflow-common`. El contenedor del scheduler no tenía las variables `MINIO_*` definidas, como se confirmó con:
-```bash
-docker exec airflow-scheduler env | grep MINIO
-# No retornaba nada
-```
-
-**Solución:** Unificar las credenciales en `docker-compose.yml` usando `minioadmin/minioadmin123` en todos los servicios, y agregar explícitamente las variables de entorno de MinIO al bloque `x-airflow-common` para que todos los contenedores de Airflow las reciban:
-```yaml
-x-airflow-common:
-  environment:
-    MINIO_ENDPOINT: minio:9000
-    MINIO_ACCESS_KEY: minioadmin
-    MINIO_SECRET_KEY: minioadmin123
-    MINIO_BUCKET: mlops-models
-```
-
----
-
-### Problema 8: DAG 3 fallaba al inicio del sistema por falta de datos
-
-**Síntoma:** Al levantar el sistema por primera vez, el DAG 3 fallaba repetidamente en `check_data_availability` con:
+**Descripción:** Al ejecutar el sistema por primera vez, el DAG 3 fallaba repetidamente en `check_data_availability` con:
 ```
 ValueError: Insufficient training data: 0 samples (minimum required: 100)
 ```
@@ -525,7 +482,7 @@ El DAG quedaba en rojo en la interfaz de Airflow.
 
 **Causa:** El DAG 3 tiene una frecuencia de ejecución de cada 2 horas. Al iniciarse el sistema por primera vez, Airflow intentaba ejecutar runs atrasados del DAG antes de que los DAGs 1 y 2 tuvieran tiempo de recolectar y procesar al menos 100 muestras. La tarea `check_data_availability` lanzaba un `ValueError` que marcaba la tarea y el DAG completo como fallido, generando alertas innecesarias.
 
-**Solución:** Reemplazar `PythonOperator` por `ShortCircuitOperator` en la tarea `check_data_availability`. Con este operador, retornar `False` no marca el DAG como fallido sino que marca las tareas siguientes como `Skipped` y el DAG termina en verde. Retornar `True` permite que el pipeline continúe normalmente:
+**Solución:** Reemplazar `PythonOperator` por `ShortCircuitOperator` en la tarea `check_data_availability`. Con este operador, retornar `False` no marca el DAG como fallido sino que marca las tareas siguientes como `Skipped` y el DAG termina exitosamente. Retornar `True` permite que el pipeline continúe normalmente:
 ```python
 from airflow.operators.python import ShortCircuitOperator
 
@@ -543,9 +500,9 @@ task_check = ShortCircuitOperator(
 
 ---
 
-### Problema 9: Módulos faltantes en la Inference API
+### Problema 6: Módulos faltantes en la Inference API
 
-**Síntoma:** Al llamar `POST /model/reload` la API respondía:
+**Descripción:** Al llamar `POST /model/reload` la API respondía:
 ```json
 {"detail": "No module named 'dill'"}
 ```
@@ -567,9 +524,9 @@ docker-compose up -d --build inference-api
 
 ---
 
-### Problema 10: numpy==1.24.4 incompatible con Python 3.12
+### Problema 7: numpy==1.24.4 incompatible con Python 3.12
 
-**Síntoma:** Al construir la imagen de la Inference API fallaba con:
+**Descripción:** Al construir la imagen de la Inference API fallaba con:
 ```
 Failed to build numpy==1.24.4
 ModuleNotFoundError: No module named 'distutils'
@@ -683,7 +640,7 @@ curl "http://localhost:80/data?group_number=8" | python3 -c \
 open http://localhost:80/docs
 ```
 
-### Inference API
+### API de Inferencia
 
 ```bash
 # Health check
@@ -718,15 +675,3 @@ curl -X POST http://localhost:8000/predict \
     "soil_type": "C7745"
   }'
 ```
-
----
-
-## 💡 Lecciones Aprendidas
-
-**Compatibilidad de versiones** — siempre verificar la versión de Python de la imagen base antes de definir versiones de paquetes. `apache/airflow:2.8.1` usa Python 3.8, lo que limita scikit-learn a máximo 1.3.2 y numpy a 1.24.4. Para la Inference API, `python:3.11-slim` es el balance correcto.
-
-**Airflow en Docker** — `_PIP_ADDITIONAL_REQUIREMENTS` es inestable para producción; siempre preferir un Dockerfile personalizado. `airflow db init` es necesario para instalaciones frescas; `airflow db migrate` es solo para actualizaciones de versión. `ShortCircuitOperator` es más apropiado que lanzar excepciones cuando se quiere saltar tareas sin marcar el DAG como fallido.
-
-**Formato de APIs externas** — nunca asumir el formato de respuesta de una API externa. Verificar siempre con `curl` antes de codificar el parser. En este caso la API devolvía arrays posicionales, no diccionarios, y el código 400 era una señal de negocio válida, no un error técnico.
-
-**Buenas prácticas aplicadas** — usar `joblib` en lugar de `pickle` para modelos de scikit-learn. Aplicar escalado selectivo con `StandardScaler` solo sobre features numéricas, no sobre binarias one-hot. Normalizar `Cover_Type` a rango 0-6 siguiendo el notebook de preprocesamiento oficial. Fijar versiones específicas de herramientas (como `uv:0.6.6`) para builds reproducibles.
