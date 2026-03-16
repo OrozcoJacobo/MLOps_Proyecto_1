@@ -105,7 +105,7 @@ Es importante que todos los servicios estén en "Up" en status.
 ```bash
 docker-compose ps
 ```
-![alt text](/images/<Screenshot 2026-03-16 at 1.03.07 PM.png>)
+![alt text](</images/Screenshot 2026-03-16 at 1.03.07 PM.png>)
 
 ---
 
@@ -124,7 +124,7 @@ docker logs jupyter 2>&1 | grep "token=" | tail -1
 ```
 Ejemplo:
 
-![alt text](/images/<Screenshot 2026-03-16 at 1.08.05 PM.png>)
+![alt text](</images/Screenshot 2026-03-16 at 1.08.05 PM.png>)
 
 ---
 
