@@ -244,16 +244,22 @@ Cada directorio tiene almacenadas distintas versiones de los modelos, según el 
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.33.34 PM.png>)
 
+El último .joblib va a ser utilizado por la API de inferencia.
+
 ![alt text](</images/Screenshot 2026-03-16 at 4.35.57 PM.png>)
 
 ## 🔮 API de Inferencia
+
+![alt text](</images/Screenshot 2026-03-16 at 4.44.02 PM.png>)
 
 ### Recargar modelo desde MinIO
 ```bash
 curl -X POST http://localhost:8000/model/reload
 ```
 
-### Predecir una muestra
+![alt text](</images/Screenshot 2026-03-16 at 4.45.14 PM.png>)
+
+### Predicción
 ```bash
 curl -X POST http://localhost:8000/predict \
   -H "Content-Type: application/json" \
@@ -272,8 +278,7 @@ curl -X POST http://localhost:8000/predict \
     "soil_type": "C7745"
   }'
 ```
-
-**Respuesta:**
+**Ejemplo de Respuesta:**
 ```json
 {
   "cover_type": 4,
@@ -285,7 +290,11 @@ curl -X POST http://localhost:8000/predict \
 }
 ```
 
-### Valores válidos
+**Ejecución y respuesta real usando el modelo gradient boosting**
+![alt text](</images/Screenshot 2026-03-16 at 4.46.58 PM.png>)
+
+
+### Métodos para verificar valores válidos
 ```bash
 curl http://localhost:8000/wilderness-areas   # Rawah, Neota, Commanche, Cache
 curl http://localhost:8000/soil-types         # C2702, C2703, ..., C8776
