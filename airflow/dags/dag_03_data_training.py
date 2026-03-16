@@ -1,7 +1,7 @@
 """
 DAG 3: model_training
 ======================
-Responsabilidad: Entrenar un modelo de clasificación con los datos
+Objetivo: Entrenar un modelo de clasificación con los datos
 de ready.forest_cover y guardarlo en MinIO.
 
 - Evalúa Random Forest y Gradient Boosting
@@ -12,7 +12,7 @@ de ready.forest_cover y guardarlo en MinIO.
 """
 
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator, ShortCircuitOperator
 from airflow.utils.dates import days_ago
 from datetime import timedelta
 import json
@@ -54,6 +54,11 @@ def get_db_connection():
 # ── Task 1: Verificar datos suficientes ───────────────────────────────────────
 
 def check_data_availability(**context):
+    """
+    Verifica si hay suficientes datos para entrenar.
+    Retorna True para continuar o False para saltar las tareas siguientes
+    sin marcar el DAG como fallido (ShortCircuit).
+    """
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
@@ -62,11 +67,14 @@ def check_data_availability(**context):
         logging.info(f"Training samples available: {train_count}")
 
         if train_count < MIN_TRAINING_SAMPLES:
-            raise ValueError(
-                f"Insufficient training data: {train_count} samples "
-                f"(minimum required: {MIN_TRAINING_SAMPLES})"
+            logging.info(
+                f"Not enough data yet ({train_count}/{MIN_TRAINING_SAMPLES}). "
+                f"Skipping training — will retry on next scheduled run."
             )
+            return False
+
         context["ti"].xcom_push(key="train_count", value=train_count)
+        return True
     finally:
         cursor.close()
         conn.close()
@@ -294,7 +302,7 @@ with DAG(
     tags=["training", "mlops"],
 ) as dag:
 
-    task_check = PythonOperator(
+    task_check = ShortCircuitOperator(
         task_id="check_data_availability",
         python_callable=check_data_availability,
     )
