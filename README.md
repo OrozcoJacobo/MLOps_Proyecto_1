@@ -59,7 +59,7 @@ La API para la obtención de datos se usó de forma local, debido a los inconven
 ¡IMPORTANTE!
 El dataset usado (.csv) no se encuentra dentro del repo compartido, tampoco es posible descargarlo del sitio web porque el archivo está corrupto, por tal motivo se tuvo que usar la opción de acceso a través de código conectándose al repo dado en las indicaciones de la página. 
 
-Si el contenedor de la API ya se encuentra creado, es necesario removerlo y crear uno nuevo.
+Si el contenedor de la API ya se encuentra creado, es necesario removerlo y crear uno nuevo. De lo contrario ejecutar los siguientes comandos para acceder al directorio de la data API, crear la imagen y el contenedor correspondiente.
 
 ```bash
 cd api\ data
@@ -85,31 +85,27 @@ curl -X 'GET' \
 ### 2. Preparar directorios para airflow
 
 ```bash
-
-cd mlops-project
-
-# Crear directorios necesarios
+# Crear directorios necesarios y otorgar permisos (el directorio plugins es opcional)
 mkdir -p airflow/logs airflow/dags airflow/plugins
 chmod -R 777 airflow/logs
-
-# Configurar UID (Mac/Linux)
-echo "AIRFLOW_UID=$(id -u)" >> .env
 ```
-
-### 3. Construir y levantar servicios
+### 3. Construir imagen y levantar servicios
 
 ```bash
 docker-compose build
 docker-compose up -d
 ```
-
-> ⚠️ **Primera vez:** El proceso tarda ~3-5 minutos. Airflow inicializa la base de datos y crea el usuario admin automáticamente.
+![alt text](</images/Screenshot 2026-03-16 at 12.56.35 PM.png>)
+![alt text](</images/Screenshot 2026-03-16 at 1.00.12 PM.png>)
 
 ### 4. Verificar servicios
+
+Es importante que todos los servicios estén en "Up" en status.
 
 ```bash
 docker-compose ps
 ```
+![alt text](/images/<Screenshot 2026-03-16 at 1.03.07 PM.png>)
 
 ---
 
@@ -122,11 +118,10 @@ docker-compose ps
 | **Inference API Docs** | http://localhost:8000/docs | — |
 | **Jupyter Lab** | http://localhost:8888 | ver token en logs |
 
-Para obtener el token de Jupyter:
+Para obtener el token de Jupyter y poder acceder: 
 ```bash
 docker logs jupyter 2>&1 | grep "token=" | tail -1
 ```
-
 ---
 
 ## 📊 Flujo de Datos

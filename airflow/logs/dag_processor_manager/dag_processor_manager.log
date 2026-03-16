@@ -3433,3 +3433,216 @@ File Path                                    PID    Runtime      # DAGs    # Err
 /opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T04:52:36
 /opt/airflow/dags/dag_03_data_training.py                             1           0  0.07s           2026-03-16T04:52:36
 ================================================================================
+[2026-03-16T17:57:08.007+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2026-03-16T17:57:08.007+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2026-03-16T17:57:08.007+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2026-03-16T17:57:08.008+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2026-03-16T17:57:08.010+0000] {manager.py:741} INFO - There are 3 files in /opt/airflow/dags
+[2026-03-16T17:57:08.049+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/dag_02_data_processing.py    175  0.02s             0           0
+/opt/airflow/dags/dag_01_data_collection.py                           0           0
+/opt/airflow/dags/dag_03_data_training.py      171  0.02s             0           0
+================================================================================
+[2026-03-16T17:57:38.430+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    204  0.00s             1           0  0.16s           2026-03-16T17:57:08
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.07s           2026-03-16T17:57:08
+/opt/airflow/dags/dag_03_data_training.py      201  0.01s             1           0  0.16s           2026-03-16T17:57:08
+================================================================================
+[2026-03-16T17:58:08.715+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    225  0.00s             1           0  0.06s           2026-03-16T17:57:38
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T17:57:38
+/opt/airflow/dags/dag_03_data_training.py      222  0.01s             1           0  0.07s           2026-03-16T17:57:38
+================================================================================
+[2026-03-16T17:58:39.026+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    248  0.00s             1           0  0.06s           2026-03-16T17:58:08
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T17:58:08
+/opt/airflow/dags/dag_03_data_training.py      245  0.01s             1           0  0.06s           2026-03-16T17:58:08
+================================================================================
+[2026-03-16T17:59:09.305+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    275  0.00s             1           0  0.07s           2026-03-16T17:58:39
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T17:58:39
+/opt/airflow/dags/dag_03_data_training.py      272  0.01s             1           0  0.07s           2026-03-16T17:58:39
+================================================================================
+[2026-03-16T17:59:18.220+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15
+[2026-03-16T17:59:40.987+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2026-03-16T17:59:40.987+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2026-03-16T17:59:40.988+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2026-03-16T17:59:40.988+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2026-03-16T17:59:40.990+0000] {manager.py:741} INFO - There are 3 files in /opt/airflow/dags
+[2026-03-16T17:59:41.028+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/dag_02_data_processing.py    175  0.02s             0           0
+/opt/airflow/dags/dag_01_data_collection.py                           0           0
+/opt/airflow/dags/dag_03_data_training.py      172  0.02s             0           0
+================================================================================
+[2026-03-16T18:00:11.364+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    210  0.00s             1           0  0.15s           2026-03-16T17:59:41
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.08s           2026-03-16T17:59:41
+/opt/airflow/dags/dag_03_data_training.py      207  0.01s             1           0  0.15s           2026-03-16T17:59:41
+================================================================================
+[2026-03-16T18:00:41.700+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    231  0.00s             1           0  0.06s           2026-03-16T18:00:11
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:00:11
+/opt/airflow/dags/dag_03_data_training.py      228  0.01s             1           0  0.07s           2026-03-16T18:00:11
+================================================================================
+[2026-03-16T18:01:12.054+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    260  0.00s             1           0  0.06s           2026-03-16T18:00:41
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:00:41
+/opt/airflow/dags/dag_03_data_training.py      257  0.01s             1           0  0.07s           2026-03-16T18:00:41
+================================================================================
+[2026-03-16T18:01:42.365+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    281  0.00s             1           0  0.06s           2026-03-16T18:01:12
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:01:12
+/opt/airflow/dags/dag_03_data_training.py      278  0.01s             1           0  0.07s           2026-03-16T18:01:12
+================================================================================
+[2026-03-16T18:02:12.698+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    304  0.00s             1           0  0.06s           2026-03-16T18:01:42
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:01:42
+/opt/airflow/dags/dag_03_data_training.py      301  0.01s             1           0  0.07s           2026-03-16T18:01:42
+================================================================================
+[2026-03-16T18:02:43.063+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    325  0.00s             1           0  0.06s           2026-03-16T18:02:12
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:02:12
+/opt/airflow/dags/dag_03_data_training.py      322  0.01s             1           0  0.07s           2026-03-16T18:02:12
+================================================================================
+[2026-03-16T18:03:13.428+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    349  0.00s             1           0  0.06s           2026-03-16T18:02:43
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:02:43
+/opt/airflow/dags/dag_03_data_training.py      346  0.01s             1           0  0.07s           2026-03-16T18:02:43
+================================================================================
+[2026-03-16T18:03:43.733+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    370  0.00s             1           0  0.06s           2026-03-16T18:03:13
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:03:13
+/opt/airflow/dags/dag_03_data_training.py      367  0.01s             1           0  0.06s           2026-03-16T18:03:13
+================================================================================
+[2026-03-16T18:04:14.082+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    393  0.00s             1           0  0.06s           2026-03-16T18:03:43
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:03:43
+/opt/airflow/dags/dag_03_data_training.py      390  0.01s             1           0  0.07s           2026-03-16T18:03:43
+================================================================================
+[2026-03-16T18:04:41.343+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2026-03-16T18:04:41.353+0000] {manager.py:741} INFO - There are 3 files in /opt/airflow/dags
+[2026-03-16T18:04:44.386+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    414  0.00s             1           0  0.06s           2026-03-16T18:04:14
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:04:14
+/opt/airflow/dags/dag_03_data_training.py      411  0.01s             1           0  0.07s           2026-03-16T18:04:14
+================================================================================
+[2026-03-16T18:05:14.700+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    437  0.00s             1           0  0.05s           2026-03-16T18:04:44
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:04:44
+/opt/airflow/dags/dag_03_data_training.py      434  0.01s             1           0  0.06s           2026-03-16T18:04:44
+================================================================================
+[2026-03-16T18:05:45.026+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    458  0.00s             1           0  0.06s           2026-03-16T18:05:14
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:05:14
+/opt/airflow/dags/dag_03_data_training.py      455  0.01s             1           0  0.07s           2026-03-16T18:05:14
+================================================================================
+[2026-03-16T18:06:15.362+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    483  0.00s             1           0  0.07s           2026-03-16T18:05:45
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:05:45
+/opt/airflow/dags/dag_03_data_training.py      480  0.01s             1           0  0.07s           2026-03-16T18:05:45
+================================================================================
+[2026-03-16T18:06:45.612+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                      PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/dag_02_data_processing.py    504  0.00s             1           0  0.08s           2026-03-16T18:06:15
+/opt/airflow/dags/dag_01_data_collection.py                           1           0  0.04s           2026-03-16T18:06:15
+/opt/airflow/dags/dag_03_data_training.py      501  0.00s             1           0  0.08s           2026-03-16T18:06:15
+================================================================================

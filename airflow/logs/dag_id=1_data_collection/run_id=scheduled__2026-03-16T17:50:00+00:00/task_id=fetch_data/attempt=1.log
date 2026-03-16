@@ -1,0 +1,56 @@
+[2026-03-16T17:57:09.177+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [queued]>
+[2026-03-16T17:57:09.181+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [queued]>
+[2026-03-16T17:57:09.181+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T17:57:09.187+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-16 17:50:00+00:00
+[2026-03-16T17:57:09.188+0000] {standard_task_runner.py:60} INFO - Started process 196 to run task
+[2026-03-16T17:57:09.190+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-16T17:50:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmpah_citnv']
+[2026-03-16T17:57:09.191+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask fetch_data
+[2026-03-16T17:57:09.213+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [running]> on host 9f1f4acd16bb
+[2026-03-16T17:57:09.247+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T17:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T17:50:00+00:00'
+[2026-03-16T17:57:09.247+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=8
+[2026-03-16T17:57:09.261+0000] {dag_01_data_collection.py:61} ERROR - Error fetching data: 500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-16T17:57:09.261+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_01_data_collection.py", line 54, in fetch_data_from_api
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-16T17:57:09.266+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260316T175000, start_date=20260316T175709, end_date=20260316T175709
+[2026-03-16T17:57:09.270+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task fetch_data (500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8; 196)
+[2026-03-16T17:57:09.287+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-16T17:57:09.298+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-16T17:59:42.152+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [queued]>
+[2026-03-16T17:59:42.158+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [queued]>
+[2026-03-16T17:59:42.158+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-16T17:59:42.167+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-16 17:50:00+00:00
+[2026-03-16T17:59:42.170+0000] {standard_task_runner.py:60} INFO - Started process 196 to run task
+[2026-03-16T17:59:42.172+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-16T17:50:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmpubd8zj6b']
+[2026-03-16T17:59:42.173+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask fetch_data
+[2026-03-16T17:59:42.198+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-16T17:50:00+00:00 [running]> on host 3a7b3ca96720
+[2026-03-16T17:59:42.238+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-16T17:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-16T17:50:00+00:00'
+[2026-03-16T17:59:42.239+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=8
+[2026-03-16T17:59:42.246+0000] {dag_01_data_collection.py:61} ERROR - Error fetching data: 500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-16T17:59:42.246+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_01_data_collection.py", line 54, in fetch_data_from_api
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-16T17:59:42.253+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260316T175000, start_date=20260316T175942, end_date=20260316T175942
+[2026-03-16T17:59:42.258+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task fetch_data (500 Server Error: Internal Server Error for url: http://host.docker.internal:80/data?group_number=8; 196)
+[2026-03-16T17:59:42.269+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-16T17:59:42.280+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
