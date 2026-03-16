@@ -201,7 +201,7 @@ services:
     depends_on:
       minio:
         condition: service_healthy
-      postgressql-data:
+      postgresql-data:
         condition: service_healthy
     networks:
       - mlops-network
