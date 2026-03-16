@@ -22,7 +22,7 @@ from datetime import timedelta
 import logging
 import os
 
-DATA_DB_CONN = os.getenv("DATA_DB_CONN", "postgresql+psycopg2://mlops:mlops123@postgres-data/mlops_db")
+DATA_DB_CONN = os.getenv("DATA_DB_CONN", "postgresql+psycopg2://mlops:mlops123@postgresql-data/mlops_db")
 
 default_args = {
     "owner": "mlops-team",

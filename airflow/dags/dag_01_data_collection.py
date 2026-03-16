@@ -1,10 +1,10 @@
 """
 DAG 1: data_collection
 =======================
-Responsabilidad: Hacer UNA petición a la Data API y guardar los datos
+Objetivo: Hacer una petición a la Data API y guardar los datos
 en el esquema RAW de PostgreSQL.
 
-Restricción del proyecto: Una sola petición por ejecución del DAG.
+Una sola petición por ejecución del DAG.
 Programado cada 5 minutos para capturar todos los batches.
 """
 
@@ -19,8 +19,8 @@ import os
 
 # ── Configuración ─────────────────────────────────────────────────────────────
 DATA_API_URL = os.getenv("DATA_API_URL", "http://host.docker.internal:80")
-GROUP_NUMBER = int(os.getenv("GROUP_NUMBER", "2"))
-DATA_DB_CONN = os.getenv("DATA_DB_CONN", "postgresql+psycopg2://mlops:mlops123@postgres-data/mlops_db")
+GROUP_NUMBER = int(os.getenv("GROUP_NUMBER", "8"))
+DATA_DB_CONN = os.getenv("DATA_DB_CONN", "postgresql+psycopg2://mlops:mlops123@postgresql-data/mlops_db")
 
 default_args = {
     "owner": "mlops-team",
@@ -34,7 +34,7 @@ default_args = {
 
 def fetch_data_from_api(**context):
     """
-    Hace UNA petición a la Data API y guarda la respuesta en XCom.
+    Hace una petición a la Data API y guarda la respuesta en XCom.
     """
     url = f"{DATA_API_URL}/data"
     params = {"group_number": GROUP_NUMBER}
@@ -164,6 +164,34 @@ def save_to_raw_db(**context):
         conn.close()
 
 
+def restart_data_generation(**context):
+    """
+    Llama al endpoint /restart_data_generation de la Data API
+    para reiniciar el contador de batch del grupo.
+    Solo se ejecuta cuando fetch_data recibió un 400.
+    """
+    raw_data = context["ti"].xcom_pull(key="raw_data", task_ids="fetch_data")
+
+    if raw_data is not None:
+        logging.info("Data was fetched successfully — no restart needed.")
+        return "No restart needed."
+
+    url = f"{DATA_API_URL}/restart_data_generation"
+    params = {"group_number": GROUP_NUMBER}
+
+    logging.info(f"Restarting data generation for group {GROUP_NUMBER}...")
+
+    try:
+        response = requests.get(url, params=params, timeout=30, headers={"accept": "application/json"})
+        response.raise_for_status()
+        result = response.json()
+        logging.info(f"Restart response: {result}")
+        return f"Restart successful: {result}"
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error restarting data generation: {e}")
+        raise
+
+
 def _safe_float(value):
     try:
         return float(value) if value is not None else None
@@ -210,4 +238,14 @@ with DAG(
         """,
     )
 
-    fetch_task >> save_task
+    restart_task = PythonOperator(
+        task_id="restart_data_generation",
+        python_callable=restart_data_generation,
+        doc_md="""
+        ### Restart Data Generation
+        Calls `/restart_data_generation?group_number=8` when the API returned 400.
+        This resets the batch counter so the next DAG run can fetch new data.
+        """,
+    )
+
+    fetch_task >> save_task >> restart_task
