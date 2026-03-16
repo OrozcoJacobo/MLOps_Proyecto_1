@@ -3,7 +3,7 @@
 **Pontificia Universidad Javeriana | MLOps 2026**  
 **Grupo 8**
 
----
+--- 
 
 ## 📐 Arquitectura
 
