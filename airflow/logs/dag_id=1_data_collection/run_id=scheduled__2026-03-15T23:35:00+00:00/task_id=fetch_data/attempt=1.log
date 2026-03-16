@@ -26,3 +26,31 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http://hos
 [2026-03-15T23:40:00.488+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 10 for task fetch_data (400 Client Error: Bad Request for url: http://host.docker.internal:80/data?group_number=8; 391)
 [2026-03-15T23:40:00.530+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
 [2026-03-15T23:40:00.540+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-15T23:43:04.535+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-15T23:35:00+00:00 [queued]>
+[2026-03-15T23:43:04.539+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-15T23:35:00+00:00 [queued]>
+[2026-03-15T23:43:04.539+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 4
+[2026-03-15T23:43:04.543+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data> on 2026-03-15 23:35:00+00:00
+[2026-03-15T23:43:04.545+0000] {standard_task_runner.py:60} INFO - Started process 184 to run task
+[2026-03-15T23:43:04.547+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', '1_data_collection', 'fetch_data', 'scheduled__2026-03-15T23:35:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_01_data_collection.py', '--cfg-path', '/tmp/tmpglfmfezp']
+[2026-03-15T23:43:04.548+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask fetch_data
+[2026-03-15T23:43:04.572+0000] {task_command.py:423} INFO - Running <TaskInstance: 1_data_collection.fetch_data scheduled__2026-03-15T23:35:00+00:00 [running]> on host a5a1902e3171
+[2026-03-15T23:43:04.604+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mlops-team' AIRFLOW_CTX_DAG_ID='1_data_collection' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2026-03-15T23:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-15T23:35:00+00:00'
+[2026-03-15T23:43:04.605+0000] {dag_01_data_collection.py:42} INFO - Fetching data from http://host.docker.internal:80/data with group_number=8
+[2026-03-15T23:43:04.609+0000] {dag_01_data_collection.py:54} ERROR - Error fetching data: 400 Client Error: Bad Request for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-15T23:43:04.609+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_01_data_collection.py", line 46, in fetch_data_from_api
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http://host.docker.internal:80/data?group_number=8
+[2026-03-15T23:43:04.615+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=1_data_collection, task_id=fetch_data, execution_date=20260315T233500, start_date=20260315T234304, end_date=20260315T234304
+[2026-03-15T23:43:04.618+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2 for task fetch_data (400 Client Error: Bad Request for url: http://host.docker.internal:80/data?group_number=8; 184)
+[2026-03-15T23:43:04.646+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-15T23:43:04.656+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

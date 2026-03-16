@@ -4,7 +4,7 @@ DAG 1: data_collection
 Responsabilidad: Hacer UNA petición a la Data API y guardar los datos
 en el esquema RAW de PostgreSQL.
 
-Una sola petición por ejecución del DAG.
+Restricción del proyecto: Una sola petición por ejecución del DAG.
 Programado cada 5 minutos para capturar todos los batches.
 """
 
@@ -34,7 +34,7 @@ default_args = {
 
 def fetch_data_from_api(**context):
     """
-    Hace una petición a la Data API y guarda la respuesta en XCom.
+    Hace UNA petición a la Data API y guarda la respuesta en XCom.
     """
     url = f"{DATA_API_URL}/data"
     params = {"group_number": GROUP_NUMBER}
@@ -43,10 +43,17 @@ def fetch_data_from_api(**context):
 
     try:
         response = requests.get(url, params=params, timeout=30, headers={"accept": "application/json"})
+
+        # La API devuelve 400 cuando ya se recolectó la muestra mínima del batch actual
+        if response.status_code == 400:
+            message = response.json().get("detail", "")
+            logging.info(f"API response 400: {message} — skipping this run.")
+            context["ti"].xcom_push(key="raw_data", value=None)
+            return "No data available for this batch — skipping."
+
         response.raise_for_status()
         data = response.json()
         logging.info(f"Received {len(data) if isinstance(data, list) else 1} records")
-        # Guardar en XCom para siguiente tarea
         context["ti"].xcom_push(key="raw_data", value=data)
         context["ti"].xcom_push(key="fetch_timestamp", value=datetime.now().isoformat())
         return f"Fetched {len(data) if isinstance(data, list) else 1} records"
@@ -67,7 +74,8 @@ def save_to_raw_db(**context):
     fetch_timestamp = context["ti"].xcom_pull(key="fetch_timestamp", task_ids="fetch_data")
 
     if raw_data is None:
-        raise ValueError("No data received from XCom")
+        logging.info("No data to save — batch was already collected. Skipping.")
+        return "Skipped — no data."
 
     # Normalizar: si es dict (una sola fila), convertir a lista
     if isinstance(raw_data, dict):
