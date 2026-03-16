@@ -43,14 +43,49 @@ Data API (localhost:80)
 ## 🚀 Inicio Rápido
 
 ### 1. Pre-requisitos
-- Docker Desktop instalado y corriendo
-- Data API corriendo en `http://localhost:80`
-- Git
+- Data API en `http://localhost:80`
+- Clonar repositorio (no aplica si se realiza por asistente de VS Code):
+```bash
+git clone https://github.com/OrozcoJacobo/MLOps_Proyecto_1.git
+```
+Ingresar al directorio inicial del repo donde se encuentra todo el proyecto, si se usa VS Code esto no aplica porque al clonar el repo a través del asistente ya queda la ruta establecida en la terminal.
+```bash
+cd MLOps_Proyecto_1 
+``` 
 
-### 2. Clonar y preparar
+### 1.1 Subir API Data
+La API para la obtención de datos se usó de forma local, debido a los inconvenientes con el acceso a la VPN; por lo tanto, se agregan los archivos a este repositorio con el fin de que haga parte directamente del proyecto.
+
+¡IMPORTANTE!
+El dataset usado (.csv) no se encuentra dentro del repo compartido, tampoco es posible descargarlo del sitio web porque el archivo está corrupto, por tal motivo se tuvo que usar la opción de acceso a través de código conectándose al repo dado en las indicaciones de la página. 
+
+Si el contenedor de la API ya se encuentra creado, es necesario removerlo y crear uno nuevo.
 
 ```bash
-git clone <repo-url>
+cd api\ data
+docker-compose build
+docker-compose up -d
+``` 
+
+Probar API
+
+```bash
+curl -X 'GET' \
+  'http://localhost/data?group_number=8' \
+  -H 'accept: application/json'
+```
+
+Restaurar generación de datos para iniciar de cero cuando se ejecuten los dags de airflow. 
+
+```bash
+curl -X 'GET' \
+  'http://localhost/restart_data_generation?group_number=8' \
+  -H 'accept: application/json'
+```
+### 2. Preparar directorios para airflow
+
+```bash
+
 cd mlops-project
 
 # Crear directorios necesarios
