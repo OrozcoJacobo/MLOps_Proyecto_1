@@ -77,13 +77,20 @@ def save_to_raw_db(**context):
         logging.info("No data to save — batch was already collected. Skipping.")
         return "Skipped — no data."
 
-    # Normalizar: si es dict (una sola fila), convertir a lista
+    # La API devuelve: {"group_number": X, "batch_number": Y, "data": [[val0, val1, ...], ...]}
+    # Formato de cada fila (55 columnas):
+    # [0-9]   : elevation, aspect, slope, h_dist_hydrology, v_dist_hydrology,
+    #            h_dist_roadways, hillshade_9am, hillshade_noon, hillshade_3pm, h_dist_fire
+    # [10-13] : wilderness_area_1 a wilderness_area_4 (one-hot)
+    # [14-53] : soil_type_1 a soil_type_40 (one-hot)
+    # [54]    : cover_type
+
     if isinstance(raw_data, dict):
-        records = [raw_data]
-    elif isinstance(raw_data, list):
-        records = raw_data
+        batch_number = raw_data.get("batch_number")
+        records = raw_data.get("data", [])
     else:
-        raise ValueError(f"Unexpected data format: {type(raw_data)}")
+        batch_number = None
+        records = raw_data
 
     logging.info(f"Saving {len(records)} records to raw.forest_cover")
 
@@ -100,8 +107,10 @@ def save_to_raw_db(**context):
     try:
         cursor = conn.cursor()
 
-        # Mapeo flexible de columnas — la API puede devolver nombres distintos
-        insert_query = """
+        wa_cols = ", ".join([f"wilderness_area_{i}" for i in range(1, 5)])
+        st_cols = ", ".join([f"soil_type_{i}" for i in range(1, 41)])
+
+        insert_query = f"""
             INSERT INTO raw.forest_cover (
                 batch_number, group_number, fetched_at,
                 elevation, aspect, slope,
@@ -109,32 +118,35 @@ def save_to_raw_db(**context):
                 horizontal_distance_to_roadways,
                 hillshade_9am, hillshade_noon, hillshade_3pm,
                 horizontal_distance_to_fire_points,
-                wilderness_area, soil_type, cover_type, raw_json
+                {wa_cols},
+                {st_cols},
+                cover_type, raw_json
             ) VALUES %s
         """
 
         rows = []
         for record in records:
-            # Normalizar nombres de columnas (minúsculas, sin espacios)
-            r = {k.lower().replace(" ", "_"): v for k, v in record.items()}
-
+            r = [str(v) for v in record]  # normalizar a string por si acaso
             row = (
-                r.get("batch_number", r.get("batch", None)),
+                batch_number,
                 GROUP_NUMBER,
                 fetch_timestamp,
-                _safe_float(r.get("elevation")),
-                _safe_float(r.get("aspect")),
-                _safe_float(r.get("slope")),
-                _safe_float(r.get("horizontal_distance_to_hydrology")),
-                _safe_float(r.get("vertical_distance_to_hydrology")),
-                _safe_float(r.get("horizontal_distance_to_roadways")),
-                _safe_float(r.get("hillshade_9am")),
-                _safe_float(r.get("hillshade_noon")),
-                _safe_float(r.get("hillshade_3pm")),
-                _safe_float(r.get("horizontal_distance_to_fire_points")),
-                str(r.get("wilderness_area", "")),
-                _safe_int(r.get("soil_type")),
-                _safe_int(r.get("cover_type")),
+                _safe_float(r[0]),   # elevation
+                _safe_float(r[1]),   # aspect
+                _safe_float(r[2]),   # slope
+                _safe_float(r[3]),   # horizontal_distance_to_hydrology
+                _safe_float(r[4]),   # vertical_distance_to_hydrology
+                _safe_float(r[5]),   # horizontal_distance_to_roadways
+                _safe_float(r[6]),   # hillshade_9am
+                _safe_float(r[7]),   # hillshade_noon
+                _safe_float(r[8]),   # hillshade_3pm
+                _safe_float(r[9]),   # horizontal_distance_to_fire_points
+                _safe_int(r[10]),    # wilderness_area_1
+                _safe_int(r[11]),    # wilderness_area_2
+                _safe_int(r[12]),    # wilderness_area_3
+                _safe_int(r[13]),    # wilderness_area_4
+                *[_safe_int(r[i]) for i in range(14, 54)],  # soil_type_1 a soil_type_40
+                _safe_int(r[54]),    # cover_type
                 Json(record),
             )
             rows.append(row)
