@@ -1,13 +1,13 @@
-# 🌲 MLOps Proyecto 1
+# MLOps Proyecto 1
 
-**Pontificia Universidad Javeriana | MLOps 2026**  
+**Pontificia Universidad Javeriana**  
 **Grupo 8**
 - Jacobo Orozco
 - Javier Chaparro
 
 ---
 
-## 📐 Arquitectura
+## Arquitectura
 
 ```
 Data API (localhost:80)
@@ -42,9 +42,9 @@ Data API (localhost:80)
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio 
 
-### 1. Pre-requisitos
+### 1. Prerrequisitos
 - Data API en `http://localhost:80`
 - Clonar repositorio (no aplica si se realiza por asistente de VS Code):
 ```bash
@@ -58,7 +58,7 @@ cd MLOps_Proyecto_1
 ### 1.1 Subir API Data
 La API para la obtención de datos se usó de forma local, debido a los inconvenientes con el acceso a la VPN; por lo tanto, se agregan los archivos a este repositorio con el fin de que haga parte directamente del proyecto.
 
-¡IMPORTANTE!
+### IMPORTANTE
 El dataset usado (.csv) no se encuentra dentro del repo compartido, tampoco es posible descargarlo del sitio web porque el archivo está corrupto, por tal motivo se tuvo que usar la opción de acceso a través de código conectándose al repo dado en las indicaciones de la página. 
 
 Si el contenedor de la API ya se encuentra creado, es necesario removerlo y crear uno nuevo. De lo contrario ejecutar los siguientes comandos para acceder al directorio de la data API, crear la imagen y el contenedor correspondiente.
@@ -111,7 +111,7 @@ docker-compose ps
 
 ---
 
-## 🌐 Interfaces
+## Interfaces
 
 | Servicio | URL | Credenciales |
 |----------|-----|-------------|
@@ -130,7 +130,7 @@ Ejemplo:
 
 ---
 
-## 📊 Flujo de Datos
+## Flujo de Datos
 
 ### IMPORTANTE
 
@@ -204,7 +204,7 @@ Ejecución DAG 3 exitosa
 
 ---
 
-## 🗄️ Base de Datos
+## Base de Datos
 
 ### Esquemas PostgreSQL
 
@@ -253,7 +253,7 @@ El último .joblib va a ser utilizado por la API de inferencia.
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.35.57 PM.png>)
 
-## 🔮 API de Inferencia
+## API de Inferencia
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.44.02 PM.png>)
 
@@ -319,7 +319,7 @@ Se crea un notebook para la exploración completa del pipeline.
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 mlops-project/
@@ -349,7 +349,7 @@ mlops-project/
 ```
 ---
 
-## 🛑 Detener Servicios
+## Detener Servicios
 
 ```bash
 docker-compose down        # Detiene contenedores (conserva datos)
@@ -358,7 +358,7 @@ docker-compose down -v     # Detiene y elimina volúmenes (borra todos los datos
 
 ---
 
-## ⚠️ Notas Importantes
+## Notas Importantes
 
 1. **Una petición por ejecución de DAG** — el DAG 1 hace exactamente 1 petición por run.
 2. **Reinicio automático de batch** — cuando la API responde `400`, el DAG ejecuta automáticamente el método `/restart_data_generation` para que la siguiente ejecución tenga datos disponibles. Se podrán obtener datos más de diez veces...
@@ -368,7 +368,7 @@ docker-compose down -v     # Detiene y elimina volúmenes (borra todos los datos
 
 ---
 
-## 🐛 Problemas encontrados y soluciones
+## Problemas encontrados y soluciones
 
 ---
 
@@ -546,7 +546,7 @@ FROM python:3.11-slim
 
 ---
 
-## 🔧 Comandos Clave de Referencia
+## Comandos Clave de Referencia
 
 ### Docker Compose
 
