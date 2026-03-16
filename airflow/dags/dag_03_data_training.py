@@ -19,11 +19,11 @@ import json
 import logging
 import os
 
-DATA_DB_CONN   = os.getenv("DATA_DB_CONN",   "postgresql+psycopg2://mlops:mlops123@postgres-data/mlops_db")
+DATA_DB_CONN   = os.getenv("DATA_DB_CONN",   "postgresql+psycopg2://mlops:mlops123@postgresql-data/mlops_db")
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "minio:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
 MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minioadmin123")
-MINIO_BUCKET   = os.getenv("MINIO_BUCKET",   "mlops-models")
+MINIO_BUCKET   = os.getenv("MINIO_BUCKET",   "models")
 
 MIN_TRAINING_SAMPLES = 100
 
