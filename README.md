@@ -370,8 +370,6 @@ docker-compose down -v     # Detiene y elimina volúmenes (borra todos los datos
 
 ## Problemas encontrados y soluciones
 
----
-
 ### Problema 1: Airflow no iniciaba — base de datos no inicializada
 
 **Descripción:** Los contenedores `airflow-webserver` y `airflow-scheduler` quedaban en estado `Restarting` indefinidamente con el error:
