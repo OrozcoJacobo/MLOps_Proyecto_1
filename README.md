@@ -118,21 +118,36 @@ docker-compose ps
 | **Inference API Docs** | http://localhost:8000/docs | — |
 | **Jupyter Lab** | http://localhost:8888 | ver token en logs |
 
-Para obtener el token de Jupyter y poder acceder: 
+Para obtener el token de Jupyter y poder acceder a través de la URL: 
 ```bash
 docker logs jupyter 2>&1 | grep "token=" | tail -1
 ```
+Ejemplo:
+
+![alt text](/images/<Screenshot 2026-03-16 at 1.08.05 PM.png>)
+
 ---
 
 ## 📊 Flujo de Datos
+
+### IMPORTANTE
+
+Si el DAG 1 falla se debe eliminar el archivo "timestamps.json" del directorio api data/data. El repositorio se entrega con ese directorio vacío para que la data api genere nuevamente el archivo, sin embargo, si se presenta el error se deben ejecutar los siguientes comandos:
+
+```bash
+rm "api data/data/timestamps.json"
+docker restart fastapi
+```
 
 ### DAG 1: `1_data_collection` (cada 5 min)
 ```
 fetch_data → save_to_raw → restart_data_generation
 ```
-- Hace exactamente **1 petición GET** por ejecución a `GET /data?group_number=8`
-- Si la API responde `400` (batch agotado), salta el guardado y llama a `/restart_data_generation` para que el siguiente run pueda recolectar datos
+- Hace exactamente una petición GET por ejecución a `GET /data?group_number=8`
+- Si la API responde `400` (batch agotado), omite el guardado y ejecuta a `/restart_data_generation` para que en la siguiente ejecución pueda recolectar datos
 - Guarda en `raw.forest_cover` con el formato original de la API (arrays posicionales de 55 columnas)
+
+
 
 ### DAG 2: `2_data_processing` (cada 10 min)
 ```
