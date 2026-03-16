@@ -196,6 +196,10 @@ Ejecución DAG 3 exitosa
 
 ![alt text](</images/Screenshot 2026-03-16 at 4.16.52 PM.png>)
 
+## Diez ejecuciones de los DAG
+
+![alt text](</images/Screenshot 2026-03-16 at 4.11.58 PM.png>)
+
 ---
 
 ## 🗄️ Base de Datos
@@ -221,9 +225,28 @@ Ejecución DAG 3 exitosa
 | 5 | Douglas-fir |
 | 6 | Krummholz |
 
+## Consulta de las tres tablas en la BD posterior a las diez ejecuciones
+
+![alt text](</images/Screenshot 2026-03-16 at 4.13.13 PM.png>)
+
 ---
 
-## 🔮 Inference API
+## Modelos almacenados en MinIO
+
+Para acceder a MinIO se utilizan los siguientes datos:
+
+username: minioadmin
+password: minioadmin123
+
+![alt text](</images/Screenshot 2026-03-16 at 4.31.42 PM.png>)
+
+Cada directorio tiene almacenadas distintas versiones de los modelos, según el número de ejecuciones. 
+
+![alt text](</images/Screenshot 2026-03-16 at 4.33.34 PM.png>)
+
+![alt text](</images/Screenshot 2026-03-16 at 4.35.57 PM.png>)
+
+## 🔮 API de Inferencia
 
 ### Recargar modelo desde MinIO
 ```bash
