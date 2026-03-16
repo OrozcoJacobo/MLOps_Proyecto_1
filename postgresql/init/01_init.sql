@@ -82,11 +82,13 @@ CREATE TABLE IF NOT EXISTS raw.forest_cover (
 );
 
 -- ─── Tabla PROCESSED ─────────────────────────────────────────
+-- Datos transformados según el notebook de preprocesamiento:
+-- wilderness_area y soil_type como categóricos, Cover_Type en rango 0-6
 CREATE TABLE IF NOT EXISTS processed.forest_cover (
     id                              SERIAL PRIMARY KEY,
     raw_id                          INTEGER REFERENCES raw.forest_cover(id),
     processed_at                    TIMESTAMP DEFAULT NOW(),
-    -- Features numéricas (limpias y normalizadas)
+    -- Features numéricas (limpias, sin anomalías)
     elevation                       FLOAT NOT NULL,
     aspect                          FLOAT NOT NULL,
     slope                           FLOAT NOT NULL,
@@ -97,53 +99,11 @@ CREATE TABLE IF NOT EXISTS processed.forest_cover (
     hillshade_noon                  FLOAT NOT NULL,
     hillshade_3pm                   FLOAT NOT NULL,
     horizontal_distance_to_fire_points FLOAT NOT NULL,
-    -- Wilderness areas (one-hot encoded: 4 columnas)
-    wilderness_area_1               INTEGER DEFAULT 0,
-    wilderness_area_2               INTEGER DEFAULT 0,
-    wilderness_area_3               INTEGER DEFAULT 0,
-    wilderness_area_4               INTEGER DEFAULT 0,
-    -- Soil type (one-hot encoded: 40 columnas)
-    soil_type_1                     INTEGER DEFAULT 0,
-    soil_type_2                     INTEGER DEFAULT 0,
-    soil_type_3                     INTEGER DEFAULT 0,
-    soil_type_4                     INTEGER DEFAULT 0,
-    soil_type_5                     INTEGER DEFAULT 0,
-    soil_type_6                     INTEGER DEFAULT 0,
-    soil_type_7                     INTEGER DEFAULT 0,
-    soil_type_8                     INTEGER DEFAULT 0,
-    soil_type_9                     INTEGER DEFAULT 0,
-    soil_type_10                    INTEGER DEFAULT 0,
-    soil_type_11                    INTEGER DEFAULT 0,
-    soil_type_12                    INTEGER DEFAULT 0,
-    soil_type_13                    INTEGER DEFAULT 0,
-    soil_type_14                    INTEGER DEFAULT 0,
-    soil_type_15                    INTEGER DEFAULT 0,
-    soil_type_16                    INTEGER DEFAULT 0,
-    soil_type_17                    INTEGER DEFAULT 0,
-    soil_type_18                    INTEGER DEFAULT 0,
-    soil_type_19                    INTEGER DEFAULT 0,
-    soil_type_20                    INTEGER DEFAULT 0,
-    soil_type_21                    INTEGER DEFAULT 0,
-    soil_type_22                    INTEGER DEFAULT 0,
-    soil_type_23                    INTEGER DEFAULT 0,
-    soil_type_24                    INTEGER DEFAULT 0,
-    soil_type_25                    INTEGER DEFAULT 0,
-    soil_type_26                    INTEGER DEFAULT 0,
-    soil_type_27                    INTEGER DEFAULT 0,
-    soil_type_28                    INTEGER DEFAULT 0,
-    soil_type_29                    INTEGER DEFAULT 0,
-    soil_type_30                    INTEGER DEFAULT 0,
-    soil_type_31                    INTEGER DEFAULT 0,
-    soil_type_32                    INTEGER DEFAULT 0,
-    soil_type_33                    INTEGER DEFAULT 0,
-    soil_type_34                    INTEGER DEFAULT 0,
-    soil_type_35                    INTEGER DEFAULT 0,
-    soil_type_36                    INTEGER DEFAULT 0,
-    soil_type_37                    INTEGER DEFAULT 0,
-    soil_type_38                    INTEGER DEFAULT 0,
-    soil_type_39                    INTEGER DEFAULT 0,
-    soil_type_40                    INTEGER DEFAULT 0,
-    -- Target
+    -- Wilderness area como categórico (Rawah, Neota, Commanche, Cache)
+    wilderness_area                 VARCHAR(20) NOT NULL,
+    -- Soil type como código categórico (C2702, C7745, etc.)
+    soil_type                       VARCHAR(10) NOT NULL,
+    -- Target en rango 0-6 (original 1-7 menos 1)
     cover_type                      INTEGER NOT NULL
 );
 

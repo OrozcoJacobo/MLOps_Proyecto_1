@@ -801,3 +801,17 @@
 [2026-03-16T00:56:20.801+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:56:20.801+0000] {dag.py:3036} INFO - Sync 1 DAGs
 [2026-03-16T00:56:20.811+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:56:20.811+0000] {dag.py:3823} INFO - Setting next_dagrun for 1_data_collection to 2026-03-16 00:55:00+00:00, run_after=2026-03-16 01:00:00+00:00
 [2026-03-16T00:56:20.819+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_01_data_collection.py took 0.044 seconds
+[2026-03-16T00:56:51.041+0000] {processor.py:161} INFO - Started process (PID=668) to work on /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:56:51.042+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_01_data_collection.py for tasks to queue
+[2026-03-16T00:56:51.043+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:56:51.042+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:56:51.049+0000] {processor.py:840} INFO - DAG(s) '1_data_collection' retrieved from /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:56:51.063+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:56:51.063+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-03-16T00:56:51.073+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:56:51.073+0000] {dag.py:3823} INFO - Setting next_dagrun for 1_data_collection to 2026-03-16 00:55:00+00:00, run_after=2026-03-16 01:00:00+00:00
+[2026-03-16T00:56:51.080+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_01_data_collection.py took 0.041 seconds
+[2026-03-16T00:57:21.329+0000] {processor.py:161} INFO - Started process (PID=679) to work on /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:57:21.331+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_01_data_collection.py for tasks to queue
+[2026-03-16T00:57:21.332+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:57:21.331+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:57:21.345+0000] {processor.py:840} INFO - DAG(s) '1_data_collection' retrieved from /opt/airflow/dags/dag_01_data_collection.py
+[2026-03-16T00:57:21.368+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:57:21.367+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-03-16T00:57:21.382+0000] {logging_mixin.py:188} INFO - [2026-03-16T00:57:21.382+0000] {dag.py:3823} INFO - Setting next_dagrun for 1_data_collection to 2026-03-16 00:55:00+00:00, run_after=2026-03-16 01:00:00+00:00
+[2026-03-16T00:57:21.391+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_01_data_collection.py took 0.065 seconds
