@@ -147,7 +147,17 @@ fetch_data → save_to_raw → restart_data_generation
 - Si la API responde `400` (batch agotado), omite el guardado y ejecuta a `/restart_data_generation` para que en la siguiente ejecución pueda recolectar datos
 - Guarda en `raw.forest_cover` con el formato original de la API (arrays posicionales de 55 columnas)
 
+Se observan los 3 DAG disponibles...
 
+![alt text](</images/Screenshot 2026-03-16 at 3.59.30 PM.png>)
+
+Ejecución DAG 1 exitosa
+
+![alt text](</images/Screenshot 2026-03-16 at 4.01.08 PM.png>)
+
+Datos recibidos 
+
+![alt text](</images/Screenshot 2026-03-16 at 4.02.14 PM.png>)
 
 ### DAG 2: `2_data_processing` (cada 10 min)
 ```
@@ -163,6 +173,14 @@ raw_to_processed → processed_to_ready
   - Re-aplica one-hot encoding para dejar 54 features listas para el modelo
   - Split estratificado: **70% train / 15% val / 15% test**
 
+Ejecución DAG 2 exitosa
+
+![alt text](</images/Screenshot 2026-03-16 at 4.14.58 PM.png>)
+
+Tablas en BD posterior a la primera ejecución DAG 1 y 2 (recolección y procesamiento).
+
+![alt text](</images/Screenshot 2026-03-16 at 4.08.39 PM.png>)
+
 ### DAG 3: `3_model_training` (cada 2 horas)
 ```
 check_data_availability → train_model → upload_to_minio
@@ -173,6 +191,10 @@ check_data_availability → train_model → upload_to_minio
 - Selecciona el mejor modelo por `validation accuracy`
 - Guarda en MinIO: `mlops-models/models/{algorithm}/{version}/model_package.joblib`
 - Registra métricas en `public.model_registry` y marca el nuevo modelo como activo
+
+Ejecución DAG 3 exitosa
+
+![alt text](</images/Screenshot 2026-03-16 at 4.16.52 PM.png>)
 
 ---
 
