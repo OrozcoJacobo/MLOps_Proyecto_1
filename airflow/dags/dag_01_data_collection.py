@@ -19,7 +19,7 @@ import os
 
 # ── Configuración ─────────────────────────────────────────────────────────────
 DATA_API_URL = os.getenv("DATA_API_URL", "http://host.docker.internal:80")
-GROUP_NUMBER = int(os.getenv("GROUP_NUMBER", "1"))
+GROUP_NUMBER = int(os.getenv("GROUP_NUMBER", "2"))
 DATA_DB_CONN = os.getenv("DATA_DB_CONN", "postgresql+psycopg2://mlops:mlops123@postgres-data/mlops_db")
 
 default_args = {
